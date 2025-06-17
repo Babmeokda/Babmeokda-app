@@ -83,9 +83,6 @@ EOF
 chmod +x scripts/verify-emoji-commit.sh
 
 cat << 'EOF' > .husky/commit-msg
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
-
 ./scripts/verify-emoji-commit.sh "$1"
 EOF
 
