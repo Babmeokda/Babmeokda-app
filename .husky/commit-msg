@@ -1,0 +1,1 @@
+./scripts/verify-emoji-commit.sh "$1"
