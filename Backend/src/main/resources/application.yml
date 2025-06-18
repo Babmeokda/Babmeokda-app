@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: Backend
+
+
+  # DB ??
+  datasource:
+    driver-class-name: ${ MYSQL_DRIVER }
+    url: jdbc:mysql://${MYSQL_URL}/${MYSQL_DATABASE}?serverTimezone=Asia/Seoul&useLegacyDatetimeCode=false
+    username: ${MYSQL_USERNAME}
+    password: ${MYSQL_PASSWORD}
+
+
+
