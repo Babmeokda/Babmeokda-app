@@ -14,7 +14,8 @@ jobs:
 
     steps:
       - name: Extract branch name
-        run: echo "BRANCH_NAME=${GITHUB_HEAD_REF}" >> $GITHUB_ENV
+        run: echo "BRANCH_NAME=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV
+
 
       - name: Generate PR title from branch
         id: generate_title
