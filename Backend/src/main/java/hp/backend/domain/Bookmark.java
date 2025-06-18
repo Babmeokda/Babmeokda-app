@@ -22,4 +22,5 @@ public class Bookmark {
 	@ManyToOne
 	@JoinColumn(name = "recipe_id")
 	private Recipe recipe;
+
 }

@@ -23,4 +23,5 @@ public class RecipeProgress {
 
 	@Column(name = "recipe_progress_description",columnDefinition = "TEXT" ,nullable = false)
 	private String description;
+
 }
