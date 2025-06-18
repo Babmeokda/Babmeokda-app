@@ -11,7 +11,7 @@ import jakarta.persistence.ManyToOne;
 public class Bookmark {
 
 	@Id @GeneratedValue
-	@Column(name = "id")
+	@Column(name = "bookmark_id")
 	private Long bookmarkId;
 
 	@ManyToOne
