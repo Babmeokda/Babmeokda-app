@@ -1,0 +1,51 @@
+name: Auto PR Title Formatter
+
+on:
+  pull_request:
+    types: [opened]
+
+jobs:
+  format-pr-title:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: Extract branch name
+        run: echo "BRANCH_NAME=${GITHUB_HEAD_REF}" >> $GITHUB_ENV
+
+      - name: Generate PR title from branch
+        id: generate_title
+        run: |
+          BRANCH="${{ env.BRANCH_NAME }}"
+
+          PREFIX=$(echo "$BRANCH" | cut -d'/' -f1 | tr '[:lower:]' '[:upper:]')
+          TYPE=$(echo "$BRANCH" | cut -d'/' -f2 | tr '[:lower:]' '[:upper:]')
+          SCOPE=$(echo "$BRANCH" | cut -d'/' -f3-)
+
+          case "$TYPE" in
+            FEAT) EMOJI="✨" ;;
+            FIX) EMOJI="🐛" ;;
+            DOCS) EMOJI="📝" ;;
+            REFACTOR) EMOJI="♻️" ;;
+            STYLE) EMOJI="🎨" ;;
+            TEST) EMOJI="✅" ;;
+            CHORE) EMOJI="🔧" ;;
+            *) EMOJI="📦" ;;
+          esac
+
+          TITLE="${EMOJI} ${PREFIX}/${TYPE}: ${SCOPE}"
+          echo "title=$TITLE" >> $GITHUB_OUTPUT
+
+      - name: Update PR title
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.pulls.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.payload.pull_request.number,
+              title: "${{ steps.generate_title.outputs.title }}"
+            })
