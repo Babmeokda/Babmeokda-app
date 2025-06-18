@@ -33,4 +33,5 @@ public class UserIngredient {
 	@Column(nullable = true, length = 20)
 	private String unit;
 
+
 }

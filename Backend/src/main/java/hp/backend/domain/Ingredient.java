@@ -15,4 +15,5 @@ public class Ingredient {
 
 	@Column(nullable = false, name = "ingredient_name", length = 255)
 	private String ingredientName;
+
 }

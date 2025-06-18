@@ -1,5 +1,6 @@
 package hp.backend.domain;
 
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,4 +24,5 @@ public class RecipeProgress {
 
 	@Column(name = "recipe_progress_description",columnDefinition = "TEXT" ,nullable = false)
 	private String description;
+
 }
